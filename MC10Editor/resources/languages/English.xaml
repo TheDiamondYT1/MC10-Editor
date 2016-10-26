@@ -1,0 +1,29 @@
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:System="clr-namespace:System;assembly=mscorlib">
+
+    <System:String x:Key="WindowTitle">Minecraft Windows 10 Edition BETA</System:String>
+
+    <!-- Tabs Info -->
+    <System:String x:Key="GeneralTitle">General</System:String>
+    <System:String x:Key="GeneralDesc">Minecraft Windows 10 Edition Information</System:String>
+
+    <System:String x:Key="ResourcePacksTitle">Resource Packs</System:String>
+    <System:String x:Key="ResourcePacksDesc">Install or export Resource Packs</System:String>
+    
+    <System:String x:Key="WorldsTitle">Worlds</System:String>
+    <System:String x:Key="SettingsTitle">Settings</System:String>
+
+    <!-- Button Text -->
+    <System:String x:Key="Select">Select</System:String>
+    <System:String x:Key="Install">Install</System:String>
+    <System:String x:Key="OpenMinecraft">Open Minecraft</System:String>
+    
+    <!-- Errors -->
+    <System:String x:Key="MinecraftNotFound">We can't seem to find Minecraft Windows 10 Edition on the computer.</System:String>
+    <System:String x:Key="NotImplemented">Not implemented yet :/</System:String>
+    <System:String x:Key="Error">An error has occured.</System:String>
+
+    <System:String x:Key="Copyright">Made by Luke (aka TheDiamondYT). Currently in development, please don't steal code.</System:String>
+
+</ResourceDictionary>
