@@ -4,6 +4,8 @@ using System.Diagnostics;
 using System.Windows;
 using MC10Editor.Utils;
 using System;
+using System.Threading;
+using System.IO;
 
 namespace MC10Editor
 {
@@ -12,6 +14,8 @@ namespace MC10Editor
     /// </summary>
     public partial class MainWindow : MetroWindow
     {
+        static ProgressDialog p = new ProgressDialog();
+
         public MainWindow()
         {
             InitializeComponent();
@@ -32,21 +36,40 @@ namespace MC10Editor
             if(selectButton.Content.Equals("Select")) // If we haven't selected the Resource Pack yet
             {
                 OpenFileDialog dialog = new OpenFileDialog();
-                dialog.InitialDirectory = (bool)installCheckbox.IsChecked ? Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) : Paths.GetResourcesPath();
+                dialog.Title = "Select Resource Pack";
+                dialog.InitialDirectory = (bool) installCheckbox.IsChecked ? Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) : Paths.GetResourcesPath();
                 dialog.DefaultExt = ".zip";
                 dialog.Filter = "ZIP Files |*.zip|All Files|*.*";
 
-                var result = dialog.ShowDialog();
-
-                if(result == true)
+                if(dialog.ShowDialog() == true)
                 {
                     textureLocBox.Text = dialog.FileName;
                     selectButton.Content = (bool) installCheckbox.IsChecked ? "Install" : "Export";
                 }
             } else if (selectButton.Content.Equals("Install"))
             {
-                
+                p.Show();
+                try
+                {
+                    FileInfo fi = new FileInfo(textureLocBox.Text);
+                    fi.CopyTo(Paths.GetResourcesPath() + @"\" + Path.GetFileName(textureLocBox.Text), true);
+                } catch (IOException ee)
+                {
+                    MessageBox.Show("There was an error while copying the file: " + ee.Message, "Cannot copy file", MessageBoxButton.OK);
+                } catch (UnauthorizedAccessException eee)
+                {
+                    MessageBox.Show("There was an error while copying the file: " + eee.Message, "Cannot copy file", MessageBoxButton.OK);
+                }
+                CopyFinished();
             }
+        }
+
+        private void CopyFinished()
+        {
+            p.labelCopying.FontSize = 10;
+            p.labelCopying.Content = "Texture installed.";
+            p.Title = "Install Success";
+            p.buttonLaunch.Visibility = Visibility.Visible;
         }
     }
 }
