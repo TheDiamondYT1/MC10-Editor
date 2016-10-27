@@ -6,6 +6,8 @@ using MC10Editor.Utils;
 using System;
 using System.Threading;
 using System.IO;
+using System.Threading.Tasks;
+using System.Windows.Threading;
 
 namespace MC10Editor
 {
@@ -53,12 +55,10 @@ namespace MC10Editor
                 {
                     FileInfo fi = new FileInfo(textureLocBox.Text);
                     fi.CopyTo(Paths.GetResourcesPath() + @"\" + Path.GetFileName(textureLocBox.Text), true);
-                } catch (IOException ee)
+                }
+                catch (Exception ex)
                 {
-                    MessageBox.Show("There was an error while copying the file: " + ee.Message, "Cannot copy file", MessageBoxButton.OK);
-                } catch (UnauthorizedAccessException eee)
-                {
-                    MessageBox.Show("There was an error while copying the file: " + eee.Message, "Cannot copy file", MessageBoxButton.OK);
+                    MessageBox.Show("There was an error while copying the file: " + ex.Message, "Cannot copy file", MessageBoxButton.OK);
                 }
                 CopyFinished();
             }
