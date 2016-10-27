@@ -4,10 +4,7 @@ using System.Diagnostics;
 using System.Windows;
 using MC10Editor.Utils;
 using System;
-using System.Threading;
 using System.IO;
-using System.Threading.Tasks;
-using System.Windows.Threading;
 
 namespace MC10Editor
 {
