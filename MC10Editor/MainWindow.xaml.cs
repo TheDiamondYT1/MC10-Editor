@@ -67,7 +67,7 @@ namespace MC10Editor
                 try
                 {
                     FileInfo fi = new FileInfo(textureLocBox.Text);
-                    fi.CopyTo(Paths.GetResourcesPath() + @"\" + Path.GetFileName(textureLocBox.Text), true);
+                    fi.CopyTo(Paths.GetResourcesPath() + Path.GetFileName(textureLocBox.Text), true);
                 }
                 catch (Exception ex)
                 {
