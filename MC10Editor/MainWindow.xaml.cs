@@ -5,6 +5,7 @@ using System.Windows;
 using MC10Editor.Utils;
 using System;
 using System.IO;
+using System.Windows.Controls;
 
 namespace MC10Editor
 {
@@ -18,6 +19,21 @@ namespace MC10Editor
         public MainWindow()
         {
             InitializeComponent();
+
+            string[] worldDir = Directory.GetDirectories(Paths.GetWorldsPath());
+            foreach (string world in worldDir)
+            {
+                FileInfo worldInfo = new FileInfo(world);
+
+                try
+                {
+                    string name = File.ReadAllText(Paths.GetWorldsPath() + worldInfo.Name + "\\levelname.txt");
+                    listView.Items.Add(new ListViewItem { Content = name });
+                } catch (Exception ex)
+                {
+                    MessageBox.Show("There was an error while loading worlds: " + ex.Message, "Cannot load worlds", MessageBoxButton.OK);
+                }      
+            }
         }
 
         private void textBox_TextChanged(object sender, System.Windows.Controls.TextChangedEventArgs e)
@@ -38,7 +54,7 @@ namespace MC10Editor
                 dialog.Title = "Select Resource Pack";
                 dialog.InitialDirectory = (bool) installCheckbox.IsChecked ? Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) : Paths.GetResourcesPath();
                 dialog.DefaultExt = ".zip";
-                dialog.Filter = "ZIP Files |*.zip|All Files|*.*";
+                dialog.Filter = "ZIP Files |*.zip|MCPack Files|*.mcpack|All Files|*.*";
 
                 if(dialog.ShowDialog() == true)
                 {
@@ -67,6 +83,11 @@ namespace MC10Editor
             p.labelCopying.Content = "Texture installed.";
             p.Title = "Install Success";
             p.buttonLaunch.Visibility = Visibility.Visible;
+        }
+
+        private void listView_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
         }
     }
 }

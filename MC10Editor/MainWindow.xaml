@@ -6,7 +6,7 @@
         ResizeMode="CanMinimize"
         WindowStartupLocation="CenterScreen"
         GlowBrush="Black"
-        BorderThickness="0"             
+        BorderThickness="0"            
         Title="{StaticResource WindowTitle}" TitleCaps="False" Height="500" Width="864">
 
     <Controls:MetroWindow.WindowButtonCommands>
@@ -48,7 +48,19 @@
                         <RowDefinition Height="*"/>
                         <RowDefinition Height="40"/>
                     </Grid.RowDefinitions>
-                    <TextBlock Text="{StaticResource NotImplemented}"  HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="24" FontWeight="Light" Grid.Column="1" Margin="136,169,309,184" />
+                    <TextBlock x:Name="worldsDesc" Text="{StaticResource WorldsDesc}" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="27" FontWeight="Light" Margin="107,10,212,320" Width="360" Height="54" Grid.Column="1"/>
+                    <ListView x:Name="listView" Grid.ColumnSpan="2" HorizontalAlignment="Left" Height="329" Margin="10,55,0,0" VerticalAlignment="Top" Width="825">
+                        <ListView.ItemContainerStyle>
+                            <Style BasedOn="{StaticResource {x:Type ListViewItem}}" TargetType="ListViewItem">
+                                <Setter Property="Height" Value="50" />
+                            </Style>
+                        </ListView.ItemContainerStyle>
+                        <ListView.View>
+                            <GridView>
+                                <GridViewColumn/>
+                            </GridView>
+                        </ListView.View>
+                    </ListView>
                 </Grid>
             </TabItem>
             <TabItem Header="{StaticResource SettingsTitle}" Width="145">
